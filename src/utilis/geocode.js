@@ -26,12 +26,12 @@
 const request = require('request')
 
 const geocode =(address, Callback) =>{
-    const url='https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.' +address+'json?access_token=pk.eyJ1IjoiYW5hbmQ1NTk1IiwiYSI6ImNsOXlrZWIxdDA1dDAzbm14d2Noend2amEifQ.yWSKtvM3Y2nLvw53XEPeE' 
+    const url='https://api.mapbox.com/geocoding/v5/mapbox.places/Los%20Angeles.' +address+'json?access_token=pk.eyJ1IjoiYW5hbmQ1NTk1IiwiYSI6ImNsOXlrZWIxdDA1dDAzbm14d2Noend2amEifQ.yWSKtvM3Y2nLvw53XEPeE&limit=1' 
     
     request( {url, json:true}, (error , {body}) =>{
       if (error) {
          Callback('unable to connect to location services',undefined)
-      } else if(body.features,length ===0 ){
+      } else if(body.features.length ===0 ){
           Callback('unable to find location. Try another search', undefined)
       } else {
          Callback(undefined, {
@@ -40,7 +40,7 @@ const geocode =(address, Callback) =>{
             location : body.features[0].place_name
          })
       }
-    
+                                                                  
     })
 }
 
